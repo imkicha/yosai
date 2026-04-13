@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yosai Platform - User Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      line-height: 1.7;
+      background: #fff;
+      font-size: 14px;
+    }
+
+    /* Cover Page */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 50%, #9d174d 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 40px;
+      page-break-after: always;
+    }
+    .cover-logo {
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .cover-logo span {
+      font-size: 48px;
+      font-weight: 800;
+      color: #ec4899;
+    }
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    .cover .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+    .cover .version {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-top: 40px;
+    }
+
+    /* Table of Contents */
+    .toc {
+      padding: 60px 80px;
+      page-break-after: always;
+    }
+    .toc h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #be185d;
+      margin-bottom: 30px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #fce7f3;
+    }
+    .toc-section {
+      margin-bottom: 24px;
+    }
+    .toc-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toc-section-title .num {
+      background: #ec4899;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .toc-items {
+      list-style: none;
+      padding-left: 38px;
+    }
+    .toc-items li {
+      padding: 4px 0;
+      color: #64748b;
+      font-size: 13px;
+      position: relative;
+      padding-left: 16px;
+    }
+    .toc-items li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      background: #f9a8d4;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Content Pages */
+    .page {
+      padding: 50px 80px;
+      page-break-after: always;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #fce7f3;
+    }
+    .section-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .section-icon.pink { background: #fce7f3; }
+    .section-icon.purple { background: #f3e8ff; }
+    .section-icon.blue { background: #dbeafe; }
+    .section-icon.green { background: #dcfce7; }
+    .section-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .section-header p {
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #be185d;
+      margin: 32px 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3 .icon { font-size: 20px; }
+
+    /* Step boxes */
+    .steps {
+      background: #fdf2f8;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 14px 0 20px 0;
+    }
+    .step {
+      display: flex;
+      gap: 14px;
+      padding: 10px 0;
+      align-items: flex-start;
+    }
+    .step:not(:last-child) {
+      border-bottom: 1px solid #fce7f3;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ec4899;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text {
+      font-size: 13.5px;
+      color: #374151;
+    }
+    .step-text strong {
+      color: #1a1a2e;
+    }
+
+    /* Info boxes */
+    .info-box {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    .info-box.tip {
+      background: #ecfdf5;
+      border-left: 4px solid #10b981;
+      color: #065f46;
+    }
+    .info-box.note {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+    .info-box.warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      color: #92400e;
+    }
+    .info-box-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    /* Status table */
+    .status-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    .status-table th {
+      background: #fdf2f8;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: #be185d;
+      border-bottom: 2px solid #f9a8d4;
+    }
+    .status-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #f3f4f6;
+      color: #374151;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-confirmed { background: #dbeafe; color: #1e40af; }
+    .badge-shipped { background: #e0e7ff; color: #3730a3; }
+    .badge-delivered { background: #dcfce7; color: #166534; }
+    .badge-cancelled { background: #fee2e2; color: #991b1b; }
+
+    /* Feature cards */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 14px 0;
+    }
+    .feature-card {
+      border: 1px solid #f3f4f6;
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .feature-card-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .feature-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .feature-card p {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      background: #fdf2f8;
+      border: 2px solid #f9a8d4;
+      border-radius: 10px;
+      padding: 12px 18px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #be185d;
+    }
+    .flow-arrow {
+      font-size: 20px;
+      color: #ec4899;
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 16px;
+      padding: 16px 20px;
+      background: #fafafa;
+      border-radius: 10px;
+      border: 1px solid #f0f0f0;
+    }
+    .faq-q {
+      font-weight: 600;
+      color: #1a1a2e;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    p {
+      font-size: 13.5px;
+      color: #4b5563;
+      margin: 8px 0;
+    }
+
+    /* Print styles */
+    @media print {
+      body { font-size: 12px; }
+      .page { padding: 40px 50px; }
+      .toc { padding: 40px 50px; }
+      .cover { min-height: 100vh; }
+    }
+
+    /* Bullet list style */
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+    .bullet-list li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 13.5px;
+      color: #374151;
+    }
+    .bullet-list li::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      background: #f9a8d4;
+      border-radius: 50%;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 14px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== COVER PAGE ==================== -->
+  <div class="cover">
+    <div class="cover-logo"><span>Y</span></div>
+    <h1>Yosai Platform</h1>
+    <p class="subtitle">Complete User Guide</p>
+    <p style="font-size: 16px; opacity: 0.85; max-width: 500px;">
+      Everything you need to know about using the Yosai multivendor marketplace as a Customer, Vendor, or Administrator.
+    </p>
+    <p class="version">Version 1.0 &middot; March 2026</p>
+  </div>
+
+  <!-- ==================== TABLE OF CONTENTS ==================== -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><span class="num">1</span> Getting Started</div>
+      <ul class="toc-items">
+        <li>Creating an Account</li>
+        <li>Signing In</li>
+        <li>Navigation Overview</li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><span class="num">2</span> Customer Guide</div>
+      <ul class="toc-items">
+        <li>Browsing Products</li>
+        <li>Cart & Checkout</li>
+        <li>Payment (Razorpay & Wallet)</li>
+        <li>Tracking Orders</li>
+        <li>Managing Addresses</li>
+        <li>Wallet</li>
+        <li>Edit Profile & Support</li>
+        <li>Stitch Service & Contact</li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><span class="num">3</span> Vendor Guide</div>
+      <ul class="toc-items">
+        <li>Becoming a Vendor</li>
+        <li>Dashboard Overview</li>
+        <li>Managing Products</li>
+        <li>Managing Orders</li>
+        <li>Shipping with Shiprocket</li>
+        <li>Wallet & Payouts</li>
+        <li>Bank Details, Coupons & Documents</li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><span class="num">4</span> Admin Guide</div>
+      <ul class="toc-items">
+        <li>Admin Dashboard</li>
+        <li>Vendor Management</li>
+        <li>Products, Orders & Users</li>
+        <li>Commission Settings</li>
+        <li>Payout Management</li>
+        <li>Coupons, Support & Documents</li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><span class="num">5</span> FAQ & Policies</div>
+      <ul class="toc-items">
+        <li>Frequently Asked Questions</li>
+        <li>Platform Policies</li>
+        <li>Getting Help</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== GETTING STARTED ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon pink">&#128640;</div>
+      <div>
+        <h2>1. Getting Started</h2>
+        <p>Create your account and start using the platform</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128221;</span> Creating an Account</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Visit the website and click <strong>Sign Up</strong> in the top navigation bar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Enter your <strong>Full Name</strong>, <strong>Email Address</strong>, and a <strong>Password</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Re-enter your password in the <strong>Confirm Password</strong> field.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Click <strong>Create Account</strong>. You will be logged in automatically.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128274;</span> Signing In</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Click <strong>Sign In</strong> in the navigation bar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Enter your <strong>Email</strong> and <strong>Password</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Click <strong>Sign In</strong>. Based on your role, you'll be redirected to the appropriate dashboard.</div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="info-box-title">&#9989; Role-Based Access</div>
+      <strong>Customers</strong> go to the Home page &middot; <strong>Vendors</strong> go to Vendor Dashboard &middot; <strong>Admins</strong> go to Admin Dashboard
+    </div>
+
+    <h3><span class="icon">&#128187;</span> Navigation Overview</h3>
+    <div class="two-col">
+      <div>
+        <strong style="font-size: 13px; color: #1a1a2e;">Desktop</strong>
+        <p>Use the top navigation bar. After login, click your <strong>name</strong> to see a dropdown menu with quick links to Orders, Addresses, Wallet, Support, and Profile.</p>
+      </div>
+      <div>
+        <strong style="font-size: 13px; color: #1a1a2e;">Mobile</strong>
+        <p>Use the <strong>bottom navigation bar</strong> for quick access to Home, Readymades, Cart, and Account. The hamburger menu provides additional options.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CUSTOMER GUIDE ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon pink">&#128722;</div>
+      <div>
+        <h2>2. Customer Guide</h2>
+        <p>Shop, order, and manage your account</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128269;</span> Browsing Products</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Click <strong>Readymades</strong> in the navigation bar to see all available products.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Use <strong>filters and search</strong> to find specific items by category, price, or name.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Click any product to view <strong>details, images, variants</strong> (size/color), and pricing.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128722;</span> Adding to Cart & Checkout</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">On the product page, select your <strong>size</strong> and <strong>color</strong>, then click <strong>Add to Cart</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Click the <strong>Cart icon</strong> in the navbar. Adjust quantities or remove items.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Click <strong>Proceed to Checkout</strong>. Select or add a delivery address.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Review your order summary and click <strong>Place Order</strong>.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128179;</span> Payment Options</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128179;</div>
+        <h4>Razorpay</h4>
+        <p>Pay securely with UPI, Debit/Credit Cards, Net Banking, or Mobile Wallets. A payment window opens automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128176;</div>
+        <h4>Wallet Balance</h4>
+        <p>Use your wallet balance to pay fully or partially. Remaining amount can be paid via Razorpay.</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128230;</span> Tracking Your Orders</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Click your <strong>name</strong> in the navbar, then select <strong>My Orders</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">See all orders with their current status at a glance.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Click any order to view full details &mdash; items, payment info, shipping status, and timeline.</div>
+      </div>
+    </div>
+
+    <h3>Order Status Guide</h3>
+    <table class="status-table">
+      <thead>
+        <tr><th>Status</th><th>What It Means</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="status-badge badge-pending">Pending</span></td><td>Order placed, waiting for vendor confirmation</td></tr>
+        <tr><td><span class="status-badge badge-confirmed">Confirmed</span></td><td>Vendor has accepted and is preparing your order</td></tr>
+        <tr><td><span class="status-badge badge-shipped">Shipped</span></td><td>Order dispatched, on the way to you</td></tr>
+        <tr><td><span class="status-badge badge-delivered">Delivered</span></td><td>Successfully delivered to your address</td></tr>
+        <tr><td><span class="status-badge badge-cancelled">Cancelled</span></td><td>Order has been cancelled</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== CUSTOMER GUIDE PAGE 2 ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon pink">&#128100;</div>
+      <div>
+        <h2>2. Customer Guide (continued)</h2>
+        <p>Account management features</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128205;</span> Managing Addresses</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Click your name &rarr; <strong>Manage Addresses</strong> from the dropdown.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Add</strong> a new address with name, phone, street, city, state, and pincode.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Edit</strong> or <strong>Delete</strong> existing addresses. Set one as <strong>Default</strong> for quick checkout.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128176;</span> Wallet</h3>
+    <p>Your wallet holds credits from refunds and promotions. Access it via your name dropdown &rarr; <strong>Wallet</strong>.</p>
+    <ul class="bullet-list">
+      <li>View current balance and full transaction history</li>
+      <li>Wallet balance is automatically available at checkout</li>
+      <li>Refunds are credited directly to your wallet</li>
+    </ul>
+
+    <h3><span class="icon">&#9999;&#65039;</span> Edit Profile</h3>
+    <p>Update your name and phone number via your name dropdown &rarr; <strong>Edit Profile</strong>.</p>
+
+    <h3><span class="icon">&#127897;</span> Support</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to your name dropdown &rarr; <strong>Support</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Create a <strong>new ticket</strong> describing your issue.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Track ticket status and view replies from the support team.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#9986;&#65039;</span> Stitch Service</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Click <strong>Stitch Service</strong> in the navigation bar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Browse available stitching and tailoring services.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Click <strong>Book Now</strong>, fill in details, and submit your booking.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128222;</span> Contact Us</h3>
+    <p>Visit the <strong>Contact</strong> page from the navbar or footer. Fill in the form with your query, or request a callback. You can also use the <strong>WhatsApp button</strong> at the bottom-right corner for instant help.</p>
+  </div>
+
+  <!-- ==================== VENDOR GUIDE ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon purple">&#127978;</div>
+      <div>
+        <h2>3. Vendor Guide</h2>
+        <p>Set up your store and start selling</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128640;</span> Becoming a Vendor</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Visit the <strong>Vendor Onboarding</strong> page.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Fill in your <strong>business details</strong> &mdash; name, description, contact info.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Provide <strong>bank account details</strong> and upload required <strong>documents</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Submit your application and <strong>wait for admin approval</strong>.</div>
+      </div>
+    </div>
+
+    <div class="info-box note">
+      <div class="info-box-title">&#128712; Note</div>
+      You will be notified once your application is approved. After approval, log in to access your vendor panel.
+    </div>
+
+    <h3><span class="icon">&#128202;</span> Vendor Dashboard</h3>
+    <p>Your dashboard shows a complete overview of your store:</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128230;</div>
+        <h4>Total Orders</h4>
+        <p>Number of orders received for your products</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128176;</div>
+        <h4>Revenue</h4>
+        <p>Total earnings from your product sales</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128230;</div>
+        <h4>Products</h4>
+        <p>Total active products in your store</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128200;</div>
+        <h4>Analytics</h4>
+        <p>Charts and trends for your sales performance</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128230;</span> Managing Products</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Products</strong> in the sidebar. Click <strong>Add Product</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Fill in: <strong>Name, Description, Category, Price</strong>, and <strong>Compare-at Price</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Upload <strong>multiple product images</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Add <strong>variants</strong> (size + color combinations) with individual stock quantities.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text">Click <strong>Save</strong>. Edit or delete products anytime from the Products page.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== VENDOR GUIDE PAGE 2 ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon purple">&#128666;</div>
+      <div>
+        <h2>3. Vendor Guide (continued)</h2>
+        <p>Orders, shipping, and payouts</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128203;</span> Managing Orders</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Orders</strong> in the sidebar to see all orders for your products.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Confirm</strong> pending orders to begin processing.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Follow the shipping workflow (see below) to dispatch the order.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128666;</span> Shipping with Shiprocket</h3>
+    <p>The platform integrates with <strong>Shiprocket</strong> for shipping. Follow these 3 steps in order:</p>
+    <div class="flow">
+      <div class="flow-step">&#9312; Create Shipment</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">&#9313; Assign AWB</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">&#9314; Schedule Pickup</div>
+    </div>
+    <table class="status-table">
+      <thead>
+        <tr><th>Step</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Create Shipment</strong></td><td>Generates a shipment in Shiprocket with order and address details</td></tr>
+        <tr><td><strong>Assign AWB</strong></td><td>Gets a tracking number (Airway Bill) from the courier partner</td></tr>
+        <tr><td><strong>Schedule Pickup</strong></td><td>Arranges for the courier to collect the package from your location</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <div class="info-box-title">&#9888;&#65039; Important</div>
+      Each step must be completed in order. The next button becomes available only after the previous step is done.
+    </div>
+
+    <h3><span class="icon">&#128176;</span> Wallet & Payouts</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Wallet</strong> to view your earnings and transaction history.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Click <strong>Request Payout</strong> and enter the amount you want to withdraw.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">The admin will <strong>review and approve</strong> your payout request.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Track your payout history and status (Pending / Approved / Rejected).</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#127915;</span> Other Vendor Features</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">&#127974;</div>
+        <h4>Bank Details</h4>
+        <p>Add/update your bank account info (holder name, account number, IFSC, bank name) for payouts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#127915;</div>
+        <h4>Coupons</h4>
+        <p>Create discount coupons with percentage/fixed discounts, minimum order amounts, and expiry dates.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128196;</div>
+        <h4>Documents</h4>
+        <p>Upload required business documents (GST, PAN, etc.) and check their verification status.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#127897;</div>
+        <h4>Support</h4>
+        <p>Create tickets for platform-related issues and communicate with the admin team.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN GUIDE ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon blue">&#128736;</div>
+      <div>
+        <h2>4. Admin Guide</h2>
+        <p>Manage the entire platform</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128202;</span> Admin Dashboard</h3>
+    <p>The dashboard gives you a bird's-eye view of the entire platform:</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">&#127978;</div>
+        <h4>Total Vendors</h4>
+        <p>All registered vendors and pending approvals</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128230;</div>
+        <h4>Total Orders</h4>
+        <p>All orders across the entire platform</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128176;</div>
+        <h4>Total Revenue</h4>
+        <p>Platform-wide revenue from all sales</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128200;</div>
+        <h4>Commission Earned</h4>
+        <p>Total commission earnings from vendors</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#127978;</span> Vendor Management</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Vendors</strong> to see all registered vendors.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Approve</strong> or <strong>Reject</strong> pending vendor applications.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Click a vendor to see full details &mdash; business info, products, orders, wallet balance.</div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="info-box-title">&#9989; Tip</div>
+      When a vendor is approved, a Shiprocket pickup location is automatically created for them.
+    </div>
+
+    <h3><span class="icon">&#128176;</span> Commission Settings</h3>
+    <p>Control how much commission the platform earns from each sale:</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Commissions</strong> in the sidebar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Set a <strong>Global Default</strong> commission percentage (applies to all vendors).</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Optionally set <strong>vendor-specific overrides</strong> for individual vendors.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Configure <strong>commission slabs</strong> for tiered rates based on order value.</div>
+      </div>
+    </div>
+
+    <div class="info-box note">
+      <div class="info-box-title">&#128712; How Commission Works</div>
+      System checks: Vendor-specific rate &rarr; Global default &rarr; Fallback 5%. Commission is automatically deducted from each order.
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN GUIDE PAGE 2 ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon blue">&#128736;</div>
+      <div>
+        <h2>4. Admin Guide (continued)</h2>
+        <p>Payouts, orders, and more</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128176;</span> Payout Management</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Payouts</strong>. View all vendor payout requests.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Filter by status: <strong>Pending</strong>, <strong>Approved</strong>, or <strong>Rejected</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Approve</strong> &mdash; Confirm the payout and add a transaction reference number.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Reject</strong> &mdash; Decline with an admin note explaining the reason.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128203;</span> Products, Orders & Users</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128230;</div>
+        <h4>Products</h4>
+        <p>View all products across all vendors. Monitor listings for quality and compliance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128203;</div>
+        <h4>Orders</h4>
+        <p>View all platform orders. Filter by status, date, or vendor. See payment and shipping details.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128101;</div>
+        <h4>Users</h4>
+        <p>View all registered customers and manage user accounts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#127915;</div>
+        <h4>Coupons</h4>
+        <p>Create platform-wide coupons and manage all coupons (admin + vendor).</p>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#127897;</span> Support Tickets</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Support</strong> to see all tickets from customers and vendors.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Reply</strong> to tickets to help resolve issues.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Track ticket statuses and resolution progress.</div>
+      </div>
+    </div>
+
+    <h3><span class="icon">&#128196;</span> Document Verification</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Go to <strong>Documents</strong> to review vendor-uploaded documents.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Approve</strong> documents that are valid, or request re-upload.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FAQ & POLICIES ==================== -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-icon green">&#10068;</div>
+      <div>
+        <h2>5. FAQ & Policies</h2>
+        <p>Common questions and platform policies</p>
+      </div>
+    </div>
+
+    <h3>Frequently Asked Questions</h3>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: How do I reset my password?</div>
+      <div class="faq-a">A: Contact support through the Support section or the Contact page for password reset assistance.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: How long does delivery take?</div>
+      <div class="faq-a">A: Delivery timelines depend on your location and the vendor's shipping arrangement. Check the Shipping Policy for details.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: Can I cancel an order?</div>
+      <div class="faq-a">A: Orders can be cancelled before they are shipped. Go to My Orders, select the order, and request cancellation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: How do refunds work?</div>
+      <div class="faq-a">A: Approved refunds are credited to your wallet balance, which can be used for future orders.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: How do I become a vendor?</div>
+      <div class="faq-a">A: Visit the Vendor Onboarding page, fill in your business details, upload required documents, and wait for admin approval.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: How is vendor commission calculated?</div>
+      <div class="faq-a">A: Commission is automatically deducted from each order. The admin sets rates (vendor-specific or global default, minimum 5%).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q: How do vendor payouts work?</div>
+      <div class="faq-a">A: Vendors request payouts from their wallet. The admin reviews and approves the request. Approved amounts are transferred to the vendor's registered bank account.</div>
+    </div>
+
+    <h3 style="margin-top: 36px;">Platform Policies</h3>
+    <p>The following policies are available from the website footer:</p>
+    <ul class="bullet-list">
+      <li><strong>Privacy Policy</strong> &mdash; How user data is collected, stored, and used</li>
+      <li><strong>Terms and Conditions</strong> &mdash; Platform usage terms and agreements</li>
+      <li><strong>Refund Policy</strong> &mdash; Refund eligibility criteria and process</li>
+      <li><strong>Return Policy</strong> &mdash; Return eligibility criteria and process</li>
+      <li><strong>Shipping Policy</strong> &mdash; Shipping timelines, charges, and delivery information</li>
+    </ul>
+
+    <h3 style="margin-top: 36px;"><span class="icon">&#128172;</span> Need Help?</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">&#127897;</div>
+        <h4>Support Tickets</h4>
+        <p>Create a support ticket after logging in for tracked assistance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128222;</div>
+        <h4>Contact Page</h4>
+        <p>Fill in the contact form or request a callback.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">&#128172;</div>
+        <h4>WhatsApp</h4>
+        <p>Use the WhatsApp button at the bottom-right corner for instant help.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

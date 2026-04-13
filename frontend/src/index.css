@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 330 81% 50%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 330 81% 50%;
+    --radius: 0.5rem;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Poppins', sans-serif; background-color: #fffdfe; color: #111827; }
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+}
+
+@layer utilities {
+  .brand-gradient { background: linear-gradient(135deg, #DB2777 0%, #7C3AED 100%); }
+  .brand-gradient-text { background: linear-gradient(135deg, #DB2777 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .card { @apply bg-white rounded-2xl shadow-sm border border-gray-100; }
+  .btn-primary { @apply px-5 py-2.5 rounded-xl font-semibold text-white brand-gradient hover:opacity-90 transition-all duration-200 shadow-md; }
+  .btn-outline { @apply px-5 py-2.5 rounded-xl font-semibold text-pink-600 border-2 border-pink-500 hover:bg-pink-50 transition-all duration-200; }
+  .input { @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all; }
+  .badge-pending { @apply px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700; }
+  .badge-approved { @apply px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700; }
+  .badge-rejected { @apply px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700; }
+  .badge-shipped { @apply px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700; }
+  .badge-delivered { @apply px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700; }
+  .skeleton { @apply bg-gray-200 animate-pulse rounded; }
+  .text-balance { text-wrap: balance; }
+}

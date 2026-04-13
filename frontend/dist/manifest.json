@@ -1,0 +1,22 @@
+{
+  "name": "Yosai",
+  "short_name": "Yosai",
+  "description": "Yosai — Premium Tailoring & Multivendor Marketplace",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffdfe",
+  "theme_color": "#DB2777",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/squarelogo1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
