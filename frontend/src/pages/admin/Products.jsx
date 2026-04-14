@@ -39,7 +39,7 @@ export default function AdminProducts() {
     onError: () => toast.error("Failed to update product status"),
   });
 
-  const products = (data?.data || []).filter(p =>
+  const products = (data || []).filter(p =>
     !search || p.name?.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -95,7 +95,7 @@ export default function AdminProducts() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 text-sm truncate">{p.name}</h3>
-                  <p className="text-xs text-gray-400 mt-0.5">{p.vendorId?.brandName} · {p.category}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{p.vendorId?.brandName} · {p.category?.name || p.category}</p>
                   <p className="font-bold text-gray-900 mt-1">{formatPrice(lowestPrice)}</p>
                   <p className="text-xs text-gray-400 mt-0.5">Submitted {formatDate(p.createdAt)}</p>
 

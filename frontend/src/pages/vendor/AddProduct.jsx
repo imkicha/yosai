@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
 import { Plus, Trash2, Upload, Package } from "lucide-react";
@@ -13,10 +13,50 @@ const emptyVariant = () => ({ color: "", sizes: [{ size: "Free Size", stock: 10 
 export default function AddProduct() {
   const navigate = useNavigate();
   const qc = useQueryClient();
+  const { id } = useParams();
+  const isEdit = !!id;
   const [form, setForm] = useState({
-    name: "", description: "", category: "", images: [], featured: false,
+    name: "", description: "", category: "", images: [], videoUrl: "", featured: false,
     variants: [emptyVariant()],
   });
+
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await api.get("/categories");
+      return Array.isArray(res) ? res : res.data || [];
+    },
+  });
+
+  const { data: existing } = useQuery({
+    queryKey: ["product", id],
+    queryFn: async () => {
+      const res = await api.get(`/products/${id}`);
+      return res.data;
+    },
+    enabled: isEdit,
+  });
+
+  useEffect(() => {
+    if (!existing) return;
+    setForm({
+      name: existing.name || "",
+      description: existing.description || "",
+      category: existing.category?._id || existing.category || "",
+      images: existing.images || [],
+      videoUrl: existing.videoUrl || "",
+      featured: existing.featured || false,
+      variants: (existing.variants || []).map(v => ({
+        color: v.color || "",
+        sizes: (v.size || []).length
+          ? v.size.map(sz => ({ size: sz, stock: v.stock || 0 }))
+          : [{ size: "Free Size", stock: v.stock || 0 }],
+        price: v.price || "",
+        mrp: v.mrp || "",
+        sku: v.sku || "",
+      })),
+    });
+  }, [existing]);
 
   const set = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }));
   const setV = (i, key, val) => setForm(f => {
@@ -58,13 +98,13 @@ export default function AddProduct() {
   };
 
   const mutation = useMutation({
-    mutationFn: (data) => api.post("/products", data),
+    mutationFn: (data) => isEdit ? api.put(`/products/${id}`, data) : api.post("/products", data),
     onSuccess: () => {
       qc.invalidateQueries(["vendor-products"]);
-      toast.success("Product submitted for approval!");
+      toast.success(isEdit ? "Product updated!" : "Product submitted for approval!");
       navigate("/vendor/products");
     },
-    onError: (err) => toast.error(err?.message || "Failed to add product"),
+    onError: (err) => toast.error(err?.message || "Failed to save product"),
   });
 
   const handleSubmit = (e) => {
@@ -77,7 +117,9 @@ export default function AddProduct() {
       price: Number(v.price),
       mrp: Number(v.mrp),
       sku: v.sku,
-      size: v.sizes.map(s => ({ size: s.size, stock: Number(s.stock) })),
+      size: v.sizes.map(s => s.size).filter(Boolean),
+      stock: v.sizes.reduce((sum, s) => sum + Number(s.stock || 0), 0),
+      images: form.images,
     }));
     mutation.mutate({ ...form, variants });
   };
@@ -85,8 +127,8 @@ export default function AddProduct() {
   return (
     <div className="max-w-3xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Add Product</h1>
-        <p className="text-gray-500 text-sm mt-1">Product will be reviewed before going live</p>
+        <h1 className="text-2xl font-bold text-gray-900">{isEdit ? "Edit Product" : "Add Product"}</h1>
+        <p className="text-gray-500 text-sm mt-1">{isEdit ? "Update your product details" : "Product will be reviewed before going live"}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -101,14 +143,14 @@ export default function AddProduct() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
             <select className="input" value={form.category} onChange={set("category")} required>
               <option value="">Select Category</option>
-              {["Fashion", "Electronics", "Home & Living", "Beauty", "Sports", "Food", "Other"].map(c => (
-                <option key={c}>{c}</option>
+              {categories.map(c => (
+                <option key={c._id} value={c._id}>{c.name}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea className="input" rows={4} value={form.description} onChange={set("description")} placeholder="Describe your product..." />
+            <label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
+            <textarea className="input" rows={4} value={form.description} onChange={set("description")} placeholder="Describe your product..." required />
           </div>
           <div className="flex items-center gap-2">
             <input type="checkbox" id="featured" checked={form.featured} onChange={e => setForm(f => ({ ...f, featured: e.target.checked }))} className="w-4 h-4 accent-pink-600" />
@@ -135,6 +177,18 @@ export default function AddProduct() {
               ))}
             </div>
           )}
+
+          <div className="mt-5 pt-5 border-t border-gray-100">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Product Video URL <span className="text-gray-400">(optional)</span></label>
+            <input
+              type="url"
+              className="input"
+              value={form.videoUrl}
+              onChange={set("videoUrl")}
+              placeholder="https://example.com/video.mp4 — vertical/shorts format recommended"
+            />
+            <p className="text-xs text-gray-400 mt-1.5">Add a short vertical video to feature this product in the homepage reels section.</p>
+          </div>
         </div>
 
         {/* Variants */}
@@ -210,7 +264,7 @@ export default function AddProduct() {
         <div className="flex gap-3">
           <button type="button" onClick={() => navigate("/vendor/products")} className="btn-outline flex-1">Cancel</button>
           <button type="submit" disabled={mutation.isPending} className="btn-primary flex-1">
-            {mutation.isPending ? "Submitting..." : "Submit for Review"}
+            {mutation.isPending ? "Saving..." : isEdit ? "Save Changes" : "Submit for Review"}
           </button>
         </div>
       </form>

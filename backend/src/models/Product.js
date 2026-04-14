@@ -18,6 +18,7 @@ const ProductSchema = new mongoose.Schema(
     description: { type: String, required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true, index: true },
     images: [String],
+    videoUrl: { type: String, trim: true },
     featured: { type: Boolean, default: false },
     variants: [VariantSchema],
     tags: [String],

@@ -119,6 +119,7 @@ export default function App() {
         <Route path="dashboard" element={<VendorDashboard />} />
         <Route path="products" element={<VendorProducts />} />
         <Route path="products/add" element={<AddProduct />} />
+        <Route path="products/edit/:id" element={<AddProduct />} />
         <Route path="orders" element={<VendorOrders />} />
         <Route path="wallet" element={<VendorWallet />} />
         <Route path="analytics" element={<VendorAnalytics />} />

@@ -6,6 +6,7 @@ import api from "@/lib/api";
 import ImageCarousel from "@/components/ImageCarousel";
 import CategoriesComp from "@/components/CategoriesComp";
 import FeaturedLayout from "@/components/FeaturedLayout";
+import ProductReels from "@/components/ProductReels";
 import InstallButton from "@/components/InstallButton";
 
 const testimonials = [
@@ -311,6 +312,9 @@ export default function Home() {
         </section>
       )}
 
+      {/* ===== PRODUCT REELS — Popular Products ===== */}
+      {!loading && <ProductReels products={products} />}
+
       {/* ===== STATS ===== */}
       <section className="py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -398,10 +402,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Install App CTA */}
-      <div className="pb-8">
-        <InstallButton />
-      </div>
+      <InstallButton />
     </div>
   );
 }

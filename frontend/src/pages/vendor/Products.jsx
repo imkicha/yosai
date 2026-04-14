@@ -84,7 +84,7 @@ export default function VendorProducts() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 text-sm truncate">{p.name}</h3>
-                  <p className="text-gray-400 text-xs mt-0.5 capitalize">{p.category}</p>
+                  <p className="text-gray-400 text-xs mt-0.5 capitalize">{p.category?.name || p.category}</p>
                   <div className="flex items-center justify-between mt-2">
                     <p className="font-bold text-gray-900">{formatPrice(lowestPrice)}</p>
                     <p className="text-xs text-gray-500">Stock: {totalStock}</p>
